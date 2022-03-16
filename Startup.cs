@@ -1,6 +1,7 @@
 using BookSite2._0.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,11 +34,15 @@ namespace BookSite2._0
             });
 
             services.AddScoped<IBookSiteRepository, EFBookSiteRepository>();
-
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 

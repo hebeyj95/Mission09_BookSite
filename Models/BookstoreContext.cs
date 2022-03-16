@@ -20,6 +20,7 @@ namespace BookSite2._0.Models
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
